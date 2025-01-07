@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Social Media App</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Social Media App</h1>
-    </header>
-    <main>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A Vite project with SCSS and VanillaJS" />
+    <title>Artist Alley</title>
 
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <header id="navbar"></header>
+    <main>
+      <hero-section></hero-section>
+      <section id="features">
+        <h2>Features</h2>
+        <div class="feature">
+          <h3>Feature 1</h3>
+          <p>Short description of feature 1.</p>
+        </div>
+        <div class="feature">
+          <h3>Feature 2</h3>
+          <p>Short description of feature 2.</p>
+        </div>
+      </section>
     </main>
     <footer>
-        <p>Copyright &copy; 2025</p>
+      <p>&copy; 2025 My App. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
-</body>
-</html><!doctype html>
 
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

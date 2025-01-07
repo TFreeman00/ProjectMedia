@@ -1,2 +1,131 @@
-@import 'Components/footer';
-@import 'Components/header';
+// Import Components
+@use "Components/footer";
+@use "Components/header";
+
+// Light Mode Variables
+$background-color: #000000;
+$text-color: #fafafa;
+$primary-color: #4aa3df;
+$secondary-color: #ecf0f1;
+
+// Dark Mode Variables
+$dark-bg-color: #1e1e1e;
+$dark-text-color: #f5a700;
+$dark-primary-color: #2c3e50;
+$dark-secondary-color: #34495e;
+
+// Typography
+$font-family-primary: "Source Code Pro", monospace;
+
+body {
+  font-family: $font-family-primary;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  background-color: adjust($background-color, 5%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.welcome-message {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+}
+
+.get-started-button {
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: adjust($primary-color, 10%);
+  }
+}
+
+.custom-image {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: $dark-bg-color;
+  color: $dark-text-color;
+}
+
+body.dark-mode .container {
+  background-color: adjust($dark-bg-color, 5%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .get-started-button {
+  background-color: $dark-primary-color;
+
+  &:hover {
+    background-color: adjust($dark-primary-color, 10%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .welcome-message {
+    font-size: 1.5rem;
+  }
+
+  .get-started-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    max-height: 300px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .cta-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}

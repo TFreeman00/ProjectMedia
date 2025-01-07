@@ -1,4 +1,10 @@
-import './style.css'
-import "./styles/main.scss";
+import "./scss/main.scss";
+import './Components/Hero';
+
+
+
+
+
+
 
 
