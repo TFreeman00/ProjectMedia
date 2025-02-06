@@ -1,48 +1,56 @@
+import authStore from "../Redux/Slices/authSlice";
 import router from "../app/route.js";
 
 class LoginSection extends HTMLElement {
   constructor() {
     super();
-
     const shadow = this.attachShadow({ mode: "open" });
 
     const template = document.createElement("template");
     template.innerHTML = `
       <style>
-        /* Your CSS styles here */
       </style>
-      <section class="login">
-        <h1>Login</h1>
+      <div class="login-container">
+        <h2>Login</h2>
         <form id="loginForm">
           <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required />
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required />
           </div>
           <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required />
           </div>
           <button type="submit">Login</button>
         </form>
-      </section>
+        <button class="create-account-button" type="button">Create Account</button> </div>
     `;
 
-    shadow.appendChild(template.content.cloneNode(true)); 
+    shadow.appendChild(template.content.cloneNode(true));
 
-    const form = shadow.querySelector("#loginForm"); 
+    const loginForm = shadow.querySelector("#loginForm");
+    loginForm.addEventListener("submit", (event) =>
+      this.handleLoginSubmit(event, onNavigate)
+    );
 
-    form.addEventListener("submit", this.handleSubmit.bind(this)); 
+    const createAccountButton = shadow.querySelector(".create-account-button"); 
+    createAccountButton.addEventListener("click", () => {
+      router("/create-account");
+    });
   }
 
-  handleSubmit = async (event) => {
+  handleLoginSubmit = async (event, onNavigate) => {
     event.preventDefault();
-
-    const username = this.shadowRoot.querySelector("#username").value; 
-    const password = this.shadowRoot.querySelector("#password").value; 
+    const username = this.shadowRoot.querySelector("#loginUsername").value;
+    const password = this.shadowRoot.querySelector("#loginPassword").value;
 
     try {
-      await window.authStore.login(username, password);
-      router("dashboard"); 
+      const result = await authStore.login(username, password);
+      if (result) {
+        onNavigate("/dashboard");
+      } else {
+        alert("Login failed. Please check your username and password.");
+      }
     } catch (error) {
       console.error("Login error:", error);
       alert("Login failed. Please check your username and password.");
@@ -50,6 +58,5 @@ class LoginSection extends HTMLElement {
   };
 }
 
-customElements.define("login-section", LoginSection); 
-
+customElements.define("login-section", LoginSection);
 export default LoginSection;

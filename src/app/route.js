@@ -2,11 +2,13 @@
 import HeroSection from "../Views/Hero.js";
 import LoginSection from "../Views/Login.js";
 import DashboardSection from "../Views/Dashboard.js";
+import CreateAccountSection from "../Views/Create.js";
 
 const routes = {
+  "/": { component: DashboardSection },
   "/hero": { component: HeroSection },
   "/login": { component: LoginSection },
-  "/": { component: DashboardSection },
+  "/create-account": { component: CreateAccountSection },
 };
 
 function router(path) {
