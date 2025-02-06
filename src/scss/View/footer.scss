@@ -1,0 +1,27 @@
+footer {
+  background-color: #34495e; 
+  color: #ecf0f1; 
+  padding: 20px;
+  width: 100%;
+  text-align: center; 
+  margin-top: auto; 
+}
+
+  p {
+    margin: 0; 
+  }
+
+  .social-links {
+    margin-top: 10px;
+
+    a {
+      color: inherit; // 
+      text-decoration: none;
+      margin: 0 5px; 
+
+      &:hover {
+        text-decoration: underline; 
+      // Add social media icons later
+    }
+  }
+}

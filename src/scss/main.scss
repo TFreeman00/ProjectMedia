@@ -1,6 +1,8 @@
-// Import Components
-@use "Components/footer";
-@use "Components/header";
+@use "View/footer";
+@use "View/header";
+@use 'View/login';
+@use "View/hero";
+@use "View/dashboard";
 
 // Light Mode Variables
 $background-color: #000000;
@@ -79,7 +81,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark Mode Styles */
+// Dark Mode Styles
 body.dark-mode {
   background-color: $dark-bg-color;
   color: $dark-text-color;
@@ -98,7 +100,7 @@ body.dark-mode .get-started-button {
   }
 }
 
-/* Responsive Design */
+// Responsive design
 @media (max-width: 768px) {
   .container {
     padding: 20px;

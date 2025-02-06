@@ -1,60 +1,85 @@
-const BASE_URL = "http://localhost:5141/";
+const BASE_URL = "http://localhost:5141/api/Account";
 
-async function apiRequest(url, method = "GET", body = null, headers = {}) {
+export async function getUser(userId) {
   try {
-    const options = {
-      method,
+    const token = localStorage.getItem("authToken"); 
+    const response = await fetch(`${BASE_URL}/${userId}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        ...headers,
+        Authorization: `Bearer ${token}`, 
       },
-    };
-
-    if (body) {
-      options.body = JSON.stringify(body);
-    }
-
-    const response = await fetch(url, options);
+    });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "API request failed");
+
     }
 
-    return await response.json();
+    const user = await response.json();
+    console.log("Retrieved user data:", user);
+    return user;
   } catch (error) {
-    console.error("API Request Error:", error.message);
-    throw error;
+
   }
 }
 
-async function createUserPublicId() {
-  const url = `${BASE_URL}/account/user/create-public-id`;
-  return await apiRequest(url, "POST");
+export async function createUser(userData) {
+  try {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`${BASE_URL}`, { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const newUser = await response.json();
+    console.log("User created:", newUser);
+    return newUser;
+  } catch (error) {
+    
+  }
 }
 
-async function performUserCreation(details, publicId) {
-  const url = `${BASE_URL}/account/user/create`;
-  const body = { ...details, publicId };
-  return await apiRequest(url, "POST", body);
+export async function updateUser(userId, updatedData) {
+  try {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`${BASE_URL}/${userId}`, {
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+   
+    }
+
+    const updatedUser = await response.json();
+    console.log("User updated:", updatedUser);
+    return updatedUser;
+  } catch (error) {
+   
+  }
 }
 
-async function getUserPrivateId(publicId) {
-  const url = `${BASE_URL}/account/user/private-id/${publicId}`;
-  return await apiRequest(url);
-}
+export async function deleteUser(userId) {
+  try {
+    const token = localStorage.getItem("authToken");
+    const response = await fetch(`${BASE_URL}/${userId}`, { 
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-async function getUserDetails(userId) {
-  const url = `${BASE_URL}/account/user/details/${userId}`;
-  return await apiRequest(url);
-}
-
-async function getPublicIdBySession() {
-  const url = `${BASE_URL}/account/user/public-id/session`;
-  return await apiRequest(url);
-}
-
-async function setUserRecordToVerified(userId) {
-  const url = `${BASE_URL}/account/user/verify/${userId}`;
-  return await apiRequest(url, "POST");
+    if (response.ok) {
+      console.log("User deleted successfully");
+    }
+  } catch (error) {
+  }
 }
