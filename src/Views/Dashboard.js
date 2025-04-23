@@ -1,26 +1,43 @@
+// Views/DashboardSection.js
 import userStore from "../Redux/Slices/userSlice.js";
+import UserDashboard from "./UserDashboard.js";
+import GuestDashboard from "./GuestDashboard.js";
 
-function Dashboard() {
-  const user = userStore.state.user;
-
-  const dashboard = document.createElement("section");
-  dashboard.classList.add("dashboard"); 
-  dashboard.innerHTML = `
-    <h1>Welcome to the Dashboard, ${user ? user.firstName : "Guest"}!</h1>
-    <p>This is your personalized dashboard.</p>
-    <button id="logoutButton">Logout</button> 
-  `;
-
-  const logoutButton = dashboard.querySelector("#logoutButton");
-  if (logoutButton) {
-    logoutButton.addEventListener("click", () => {
-      window.authStore.logout();
-      window.router.navigateTo("/auth"); 
-    });
+class DashboardSection extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.render();
   }
 
- 
-  return dashboard;
+  render() {
+    const shadowRoot = this.shadowRoot;
+    shadowRoot.innerHTML = "";
+
+    const user = userStore.state.user;
+
+    if (user && !user.isGuest) {
+      const userDashboard = document.createElement("user-dashboard-section");
+      shadowRoot.appendChild(userDashboard);
+    } else {
+      const guestDashboard = document.createElement("guest-dashboard-section");
+      shadowRoot.appendChild(guestDashboard);
+    }
+  }
+
+  connectedCallback() {
+    this.unsubscribe = userStore.subscribe(() => this.render());
+    this.render();
+    console.log("DashboardSection connected to DOM.");
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    console.log("DashboardSection disconnected from DOM.");
+  }
 }
 
-export default Dashboard;
+customElements.define("dashboard-section", DashboardSection);
+export default DashboardSection;

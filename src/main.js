@@ -1,24 +1,24 @@
 import "./scss/main.scss";
 import router from "./app/route.js";
+import { Navbar } from "./Views/Navbar.js";
 
 function isLoggedIn() {
   return localStorage.getItem("isLoggedIn") === "true";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const initialPath = isLoggedIn() ? "/" : "/hero"; 
+  Navbar(); 
+  const initialPath = isLoggedIn() ? "/" : "/hero";
   router(initialPath);
 });
 
-
 document.addEventListener("click", (event) => {
   const link = event.target.closest("a");
-  if (link && link.getAttribute("href")) { 
+  if (link && link.getAttribute("href")) {
     event.preventDefault();
     const path = link.getAttribute("href");
 
-
-    if (routes[path]) { 
+    if (routes[path]) {
       router(path);
     } else {
       console.error("Invalid path:", path);

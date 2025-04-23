@@ -1,4 +1,3 @@
-// route.js
 import HeroSection from "../Views/Hero.js";
 import LoginSection from "../Views/Login.js";
 import DashboardSection from "../Views/Dashboard.js";
@@ -9,6 +8,7 @@ const routes = {
   "/hero": { component: HeroSection },
   "/login": { component: LoginSection },
   "/create-account": { component: CreateAccountSection },
+  "/forgot-password": { component: CreateAccountSection },
 };
 
 function router(path) {

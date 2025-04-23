@@ -1,24 +1,73 @@
-const BASE_URL = "http://localhost:5141/api/Account"; 
+const BASE_URL = "http://localhost:5141/auth"; 
 
-export async function verifyAccount(inviteCode, verifyCode) {
+export async function login(username, password) {
   try {
-    const response = await fetch(`${BASE_URL}/verify?invite=${inviteCode}&code=${verifyCode}`, {
-      method: "GET",
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ username, password }),
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.message || "Login failed.");
+    }
+
+    const data = await response.json();
+    return data.token;
+  } catch (error) {
+    console.error("Error during login:", error);
+    throw error;
+  }
+}
+
+export async function signup(username, password) {
+  try {
+    const response = await fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.message || "Signup failed.");
+    }
+
+    return true; 
+  } catch (error) {
+    console.error("Error during signup:", error);
+    throw error;
+  }
+}
+
+export async function verifyAccount(inviteCode, verifyCode) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/verify?invite=${inviteCode}&code=${verifyCode}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      let errorMessage = "Verification failed.";
       try {
         const errorData = await response.json();
-        if (errorData.message) {
-          throw new Error(errorData.message);
+        if (errorData?.message) {
+          errorMessage = errorData.message;
         }
       } catch (parseError) {
         console.error("Error parsing error response:", parseError);
       }
-      throw new Error("Verification failed.");
+      throw new Error(errorMessage);
     }
 
     const result = await response.json();
@@ -29,29 +78,3 @@ export async function verifyAccount(inviteCode, verifyCode) {
     throw error;
   }
 }
-
-export async function checkUsernameExists(username) {
-  try {
-    const response = await fetch(`/Account/user/check?username=${username}`);
-    if (response.ok) {
-      const data = await response.json();
-      if (data.exists) {
-        console.log("Username already exists");
-      } else {
-        console.log("Username is available");
-      }
-    } else {
-      const errorData = await response.json();
-      console.error("Username check failed:", errorData);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
-
-const inviteCode = "abcd1234EF";
-const verifyCode = "123456";
-verifyAccount(inviteCode, verifyCode);
-
-const username = "testuser";
-checkUsernameExists(username);

@@ -1,5 +1,4 @@
-// userSlice.js
-import { getUser, updateUser } from '../Api/userApi';
+import { getUser, updateUser } from "../Api/userApi";
 
 const userSlice = {
   state: {
@@ -11,7 +10,7 @@ const userSlice = {
     this.state = { ...this.state, ...newState };
     this.listeners.forEach((listener) => listener(this.state));
   },
-  listeners:[],
+  listeners: [],
   subscribe(listener) {
     this.listeners.push(listener);
     return () => {
@@ -19,7 +18,7 @@ const userSlice = {
     };
   },
   fetchUser: async (userId) => {
-    this.setState({ userLoading: true });
+    this.setState({ userLoading: true, userError: null });
     try {
       const user = await getUser(userId);
       this.setState({ user, userLoading: false });
@@ -28,13 +27,16 @@ const userSlice = {
     }
   },
   updateUser: async (userId, updatedData) => {
-    this.setState({ userLoading: true });
+    this.setState({ userLoading: true, userError: null });
     try {
       const updatedUser = await updateUser(userId, updatedData);
       this.setState({ user: updatedUser, userLoading: false });
     } catch (error) {
       this.setState({ userError: error, userLoading: false });
     }
+  },
+  setUser: (user) => {
+    userSlice.setState({ user });
   },
   // ... other user actions (createUser, deleteUser to be implimented in the future
 };

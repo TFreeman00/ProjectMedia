@@ -1,10 +1,5 @@
-// scss/View/_login.scss
-
 @use '../variables.scss';
 @use 'sass:color';
-
-// Define a Sass variable for the initial primary color
-$initial-primary-color: variables.$light-primary;
 
 :host {
   display: flex;
@@ -17,7 +12,7 @@ $initial-primary-color: variables.$light-primary;
   font-family: var(--font-primary);
 }
 
-.login-container {
+.create-account-container {
   background-color: var(--container-bg);
   padding: 2rem;
   border-radius: 0.5rem;
@@ -28,7 +23,7 @@ $initial-primary-color: variables.$light-primary;
   transition: background-color var(--transition-speed) var(--transition-ease),
               box-shadow var(--transition-speed) var(--transition-ease);
 
-  h1 {
+  h2 {
     color: var(--text-color);
     margin-bottom: 1.5rem;
     font-weight: normal;
@@ -36,11 +31,10 @@ $initial-primary-color: variables.$light-primary;
   }
 }
 
-.login-form {
+.create-account-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 1.5rem;
   text-align: left;
 
   .form-group {
@@ -55,7 +49,8 @@ $initial-primary-color: variables.$light-primary;
     }
 
     input[type="email"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="text"] {
       padding: 0.75rem 1rem;
       border: 1px solid var(--secondary-color);
       border-radius: 0.25rem;
@@ -70,7 +65,7 @@ $initial-primary-color: variables.$light-primary;
       &:focus {
         outline: none;
         border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(color.red($initial-primary-color), color.green($initial-primary-color), color.blue($initial-primary-color), 0.2);
+        box-shadow: 0 0 0 0.2rem rgba(var(--primary-color), 0.2);
       }
     }
   }
@@ -84,6 +79,7 @@ $initial-primary-color: variables.$light-primary;
     font-weight: bold;
     border-radius: 0.25rem;
     cursor: pointer;
+    margin-top: 1rem;
     transition: background-color var(--transition-speed) var(--transition-ease),
                 filter var(--transition-speed) var(--transition-ease);
 
@@ -93,29 +89,16 @@ $initial-primary-color: variables.$light-primary;
   }
 }
 
-.auth-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: center;
+.login-link {
   margin-top: 1.5rem;
+  font-size: 0.9rem;
 
-  button {
-    @extend %button-base !optional;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color var(--transition-speed) var(--transition-ease),
-                color var(--transition-speed) var(--transition-ease),
-                filter var(--transition-speed) var(--transition-ease);
-
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: text-decoration var(--transition-speed) var(--transition-ease);
     &:hover {
-      filter: brightness(1.1);
+      text-decoration: underline;
     }
   }
 }
@@ -125,18 +108,17 @@ $initial-primary-color: variables.$light-primary;
     padding: 1.5rem;
   }
 
-  .login-container {
+  .create-account-container {
     padding: 1.5rem;
 
-    h1 {
+    h2 {
       font-size: 1.75rem;
       margin-bottom: 1rem;
     }
   }
 
-  .login-form {
+  .create-account-form {
     gap: 0.75rem;
-    margin-bottom: 1rem;
 
     .form-group {
       label {
@@ -144,7 +126,8 @@ $initial-primary-color: variables.$light-primary;
       }
 
       input[type="email"],
-      input[type="password"] {
+      input[type="password"],
+      input[type="text"] {
         padding: 0.6rem 0.8rem;
         font-size: 0.9rem;
       }
@@ -156,13 +139,8 @@ $initial-primary-color: variables.$light-primary;
     }
   }
 
-  .auth-options {
-    gap: 0.5rem;
+  .login-link {
     margin-top: 1rem;
-
-    button {
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
-    }
+    font-size: 0.85rem;
   }
 }

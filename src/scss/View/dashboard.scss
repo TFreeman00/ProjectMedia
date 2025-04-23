@@ -1,22 +1,65 @@
+// scss/_dashboard.scss
+
+@use '../variables.scss';
+@use '../main.scss'; 
+
 .dashboard {
-  font-family: sans-serif;
+  font-family: var(--font-secondary);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
   min-height: 100vh;
-  padding: 20px;
+  padding: 30px;
 
   h1 {
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 10px;
+    font-family: var(--font-primary);
+    font-weight: normal;
+    width: 100%;
   }
 
-  #logoutButton {
-    background-color: #dc3545; 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+
+  .dashboard-content {
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    width: 100%;
+  }
+
+  .dashboard-actions {
+     margin-top: 30px;
+     width: 100%;
+     text-align: right;
+  }
+
+  .logout-button {
+    // @extend main.button;
+    background-color: var(--danger-color);
+    color: variables.$white-color;
+  }
+}
+
+@media (max-width: #{variables.$breakpoint-md}) {
+  .dashboard {
+    padding: 20px;
+    max-width: 100%;
+  }
+  .dashboard h1 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: #{variables.$breakpoint-sm}) {
+  .dashboard {
+    padding: 15px;
   }
 }

@@ -1,0 +1,32 @@
+// Light Mode Palette
+$light-bg: #F8F5F2;
+$light-text: #000000;
+$light-primary: #036586;
+$light-secondary: #219dce;
+$light-container-bg: #FFFFFF;
+$light-primary-rgb: 87, 155, 177;
+
+// Dark Mode Palette
+$dark-bg: #101313;
+$dark-text: #1ac000;
+$dark-primary: #1ac000;
+$dark-secondary: #000000;
+$dark-container-bg: #1f2121;
+$dark-primary-rgb: 95, 141, 139;
+
+// Neutral/Action Colors
+$danger-color: #C85C5C;
+$white-color: #FFFFFF;
+$black-color: #000000;
+
+// Typography
+$font-family-primary: "Source Code Pro", monospace;
+$font-family-secondary: sans-serif;
+
+// Breakpoints
+$breakpoint-md: 768px;
+$breakpoint-sm: 480px;
+
+// Transitions
+$transition-speed: 0.3s;
+$transition-ease: ease;
