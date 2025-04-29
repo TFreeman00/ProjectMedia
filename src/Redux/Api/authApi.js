@@ -1,42 +1,47 @@
-const BASE_URL = "http://localhost:5141/auth"; 
+// const BASE_URL = "http://localhost:5141/auth"; 
+import { sendRequest } from "./apiIntegration";
+
+
+const baseUrl = "auth";
 
 export async function login(username, password) {
   try {
-    const response = await fetch(`${BASE_URL}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData?.message || "Login failed.");
-    }
+    const endPoint = `${baseUrl}`;
 
-    const data = await response.json();
-    return data.token;
+    const reqBody = {
+      "method" : "POST",
+      "body": { username, password }, 
+      "needAuthToken" : false,
+      "isFileUpload" : false
+    };
+
+    const resp = await sendRequest(endPoint, reqBody);
+
+    // TODO: add token to local storage
+    localStorage.setItem("token", resp.token);
+    return resp;
+    
   } catch (error) {
-    console.error("Error during login:", error);
-    throw error;
+    console.error("authApi.login error:", error);
+    throw "login failed";
   }
 }
 
 export async function signup(username, password) {
+  const endpoint = `${baseUrl}/signup`;
+  
   try {
-    const response = await fetch(`${BASE_URL}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData?.message || "Signup failed.");
-    }
+  const reqBody = {
+    "method" : "POST", 
+    "body":{ "username" : username, "password": password }, 
+    "needAuthToken" : false,
+    "isFileUpload" : false
+  };
+
+
+    const response = await sendRequest(endpoint,reqBody)
 
     return true; 
   } catch (error) {
