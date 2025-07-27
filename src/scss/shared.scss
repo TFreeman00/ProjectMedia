@@ -1,0 +1,20 @@
+//  src/scss/_shared.scss
+
+%button-base {
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: filter var(--transition-speed) var(--transition-ease),
+              background-color var(--transition-speed) var(--transition-ease),
+              color var(--transition-speed) var(--transition-ease);
+
+  &:hover {
+     filter: brightness(1.1);
+  }
+}

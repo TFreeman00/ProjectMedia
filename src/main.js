@@ -1,5 +1,5 @@
 import "./scss/main.scss";
-import router from "./app/route.js";
+import router from "./services/route.js";
 import { Navbar } from "./Views/Navbar.js";
 
 function isLoggedIn() {

@@ -1,4 +1,4 @@
-import router from "../app/route.js";
+import router from "../services/route.js";
 import heroStyles from "../scss/View/hero.scss?inline";
 
 class HeroSection extends HTMLElement {

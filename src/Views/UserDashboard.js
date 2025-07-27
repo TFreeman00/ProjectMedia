@@ -1,6 +1,6 @@
 import userStore from "../Redux/Slices/userSlice.js";
-import router from "../app/route.js";
-import dashboardStyles from "../scss/View/dashboard.scss?inline"; 
+import router from "../services/route.js";
+import dashboardStyles from "../scss/View/dashboard.scss?inline";
 
 class UserDashboardSection extends HTMLElement {
   constructor() {

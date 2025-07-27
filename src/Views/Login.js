@@ -1,4 +1,4 @@
-import router from "../app/route.js";
+import router from "../services/route.js";
 import loginStyles from "../scss/View/login.scss?inline";
 import userStore from "../Redux/Slices/userSlice.js";
 
@@ -92,11 +92,11 @@ class LoginSection extends HTMLElement {
   }
 
   handleCreateAccount() {
-    router("/create-account"); 
+    router("/create-account");
   }
 
   handleForgotPassword() {
-    router("/forgot-password"); 
+    router("/forgot-password");
   }
 
   connectedCallback() {

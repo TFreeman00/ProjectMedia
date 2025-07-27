@@ -2,6 +2,7 @@
 
 @use '../variables.scss';
 @use 'sass:color';
+@use '../shared.scss';
 
 :host {
   display: flex;

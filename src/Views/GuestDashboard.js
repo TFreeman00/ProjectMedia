@@ -1,4 +1,4 @@
-import router from "../app/route.js";
+import router from "../services/route.js";
 import dashboardStyles from "../scss/View/dashboard.scss?inline";
 
 class GuestDashboardSection extends HTMLElement {

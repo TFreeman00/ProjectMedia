@@ -1,4 +1,4 @@
-import router from "../app/route.js";
+import router from "../services/route.js";
 import forgotPasswordStyles from "../scss/View/forgot.scss?inline";
 
 class ForgotPasswordSection extends HTMLElement {
@@ -57,7 +57,7 @@ class ForgotPasswordSection extends HTMLElement {
     alert(
       `A password reset link has been sent to ${email} (not actually implemented yet).`
     );
-    router("/login"); 
+    router("/login");
   }
 
   connectedCallback() {

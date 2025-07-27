@@ -1,5 +1,5 @@
 import authStore from "../Redux/Slices/authSlice.js";
-import router from "../app/route.js";
+import router from "../services/route.js";
 import createStyles from "../scss/View/create.scss?inline";
 
 class CreateAccountSection extends HTMLElement {
@@ -59,7 +59,7 @@ class CreateAccountSection extends HTMLElement {
     const password = this.shadowRoot.querySelector("#signupPassword").value;
 
     try {
-      const success = await authStore.signup(username, password, email); 
+      const success = await authStore.signup(username, password, email);
       if (success) {
         alert("Account created successfully. Please log in.");
         router("/login");

@@ -1,0 +1,62 @@
+@use '../variables.scss';
+
+.browse-container {
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.art-grid {
+  display: grid;
+  // Use auto-fit to create a responsive number of columns
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.art-card {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  aspect-ratio: 1 / 1; // Makes the cards square
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-speed) var(--transition-ease);
+  }
+
+  .art-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: variables.$white-color;
+    padding: 2rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform var(--transition-speed) var(--transition-ease);
+    
+    p {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+    .art-card-overlay {
+      transform: translateY(0);
+    }
+  }
+}
